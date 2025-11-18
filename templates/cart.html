@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Shopping Cart - GFU Nail{% endblock %}
+
+{% block content %}
+<div class="pt-24 pb-16 min-h-screen bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
+        
+        <div id="cart-container" class="bg-white rounded-lg shadow-sm p-6">
+            <div id="cart-items" class="space-y-4">
+                <!-- Cart items will be loaded here -->
+            </div>
+            
+            <div id="cart-empty" class="text-center py-12 hidden">
+                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                </svg>
+                <h3 class="mt-2 text-sm font-medium text-gray-900">Your cart is empty</h3>
+                <p class="mt-1 text-sm text-gray-500">Start shopping to add items to your cart.</p>
+                <div class="mt-6">
+                    <a href="{{ url_for('products.product_list') }}" class="btn-primary inline-block">
+                        Continue Shopping
+                    </a>
+                </div>
+            </div>
+            
+            <div id="cart-summary" class="mt-8 pt-8 border-t border-gray-200 hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-lg font-semibold text-gray-900">Total:</span>
+                    <span id="cart-total" class="text-2xl font-bold text-pink-600">$0.00</span>
+                </div>
+                <button class="w-full bg-pink-600 text-white py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    loadCart();
+    
+    function loadCart() {
+        fetch('/cart/api/items')
+            .then(response => response.json())
+            .then(data => {
+                if (data.cart.length === 0) {
+                    document.getElementById('cart-empty').classList.remove('hidden');
+                    document.getElementById('cart-summary').classList.add('hidden');
+                    return;
+                }
+                
+                document.getElementById('cart-empty').classList.add('hidden');
+                document.getElementById('cart-summary').classList.remove('hidden');
+                renderCartItems(data.cart);
+            })
+            .catch(error => {
+                console.error('Error loading cart:', error);
+            });
+    }
+    
+    function renderCartItems(cart) {
+        const container = document.getElementById('cart-items');
+        // In a real app, you'd fetch product details for each cart item
+        container.innerHTML = cart.map(item => `
+            <div class="flex items-center justify-between border-b border-gray-200 pb-4">
+                <div class="flex items-center space-x-4">
+                    <div class="w-20 h-20 bg-gray-200 rounded-lg"></div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Product ${item.product_id}</h3>
+                        <p class="text-sm text-gray-600">$29.99</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <button onclick="updateQuantity(${item.product_id}, ${item.quantity - 1})" class="w-8 h-8 border border-gray-300 rounded">-</button>
+                        <span class="w-12 text-center">${item.quantity}</span>
+                        <button onclick="updateQuantity(${item.product_id}, ${item.quantity + 1})" class="w-8 h-8 border border-gray-300 rounded">+</button>
+                    </div>
+                    <button onclick="GFUNail.removeFromCart(${item.product_id})" class="text-red-600 hover:text-red-700">
+                        Remove
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function updateQuantity(productId, quantity) {
+        if (quantity < 1) return;
+        GFUNail.updateCartQuantity(productId, quantity);
+    }
+    
+    window.updateQuantity = updateQuantity;
+});
+</script>
+{% endblock %}
+

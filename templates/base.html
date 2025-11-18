@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GFU Nail - Premium Press-On Nails & Professional Nail Services{% endblock %}</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="{{ url_for('main.index') }}" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-pink-400 to-rose-400 flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">G</span>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold text-gray-900">GFU Nail</span>
+                        <div class="text-xs text-pink-600 font-medium">Campus Beauty, Delivered to Your Door</div>
+                    </div>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{{ url_for('main.index') }}" class="text-gray-700 hover:text-pink-600 transition-colors">Home</a>
+                    <a href="{{ url_for('products.product_list') }}" class="text-gray-700 hover:text-pink-600 transition-colors">Products</a>
+                    <a href="{{ url_for('booking.booking_page') }}" class="text-gray-700 hover:text-pink-600 transition-colors">Book Appointment</a>
+                    <a href="{{ url_for('analytics.analytics_dashboard') }}" class="text-gray-700 hover:text-pink-600 transition-colors">Analytics</a>
+                    <a href="{{ url_for('trust.trust_section') }}" class="text-gray-700 hover:text-pink-600 transition-colors">About Us</a>
+                    <a href="{{ url_for('cart.cart_page') }}" class="relative text-gray-700 hover:text-pink-600 transition-colors">
+                        Cart
+                        <span id="cart-badge" class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">GFU Nail</h3>
+                    <p class="text-pink-400 text-sm font-medium mb-2">✨ Campus Beauty, Delivered to Your Door ✨</p>
+                    <p class="text-gray-400 text-sm mb-2">Premium press-on nails and professional nail services for students.</p>
+                    <p class="text-gray-500 text-xs">Guangdong University of Finance and Economics</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Studios</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>
+                            <p class="text-white font-semibold">Main Campus</p>
+                            <p>GDUFE Campus Incubator<br>Building A · Room 218</p>
+                        </li>
+                        <li>
+                            <p class="text-white font-semibold">Sanshui Studio</p>
+                            <p>GDUFE Campus Incubator<br>Qin Lake · Room 203</p>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="{{ url_for('products.product_list') }}" class="hover:text-white transition-colors">Products</a></li>
+                        <li><a href="{{ url_for('booking.booking_page') }}" class="hover:text-white transition-colors">Book Appointment</a></li>
+                        <li><a href="{{ url_for('trust.trust_section') }}" class="hover:text-white transition-colors">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Connect</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="{{ url_for('trust.redirect_xiaohongshu') }}" target="_blank" class="hover:text-white transition-colors">Follow us on Xiaohongshu</a></li>
+                        <li><a href="{{ url_for('trust.redirect_wechat_article', article_id='1') }}" target="_blank" class="hover:text-white transition-colors">Read our service updates</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 GFU Nail. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
+

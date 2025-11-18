@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - GFU Nail{% endblock %}
+
+{% block extra_head %}
+<style>
+    .story-section {
+        background: linear-gradient(135deg, #fef7ff 0%, #fce7f3 100%);
+        border-left: 4px solid #EC4899;
+    }
+    
+    .pain-point {
+        background: white;
+        border-left: 4px solid #F472B6;
+        transition: all 0.3s ease;
+    }
+    
+    .pain-point:hover {
+        transform: translateX(10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .campus-badge {
+        background: linear-gradient(135deg, #EC4899, #F472B6);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        display: inline-block;
+        box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="pt-24 pb-16 min-h-screen bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <div class="mb-6">
+                <span class="campus-badge text-lg font-bold">✨ Campus Beauty, Delivered to Your Door ✨</span>
+            </div>
+            <h1 class="text-5xl font-bold text-gray-900 mb-4">About GFU Nail</h1>
+            <p class="text-gray-600 text-xl">Born from a student's dream to make beautiful nails accessible to everyone on campus</p>
+        </div>
+        
+        <!-- Our Story - More Emotional -->
+        <div class="story-section rounded-2xl shadow-lg p-10 mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
+            <div class="space-y-6 text-lg leading-relaxed">
+                <p class="text-gray-800 font-medium">
+                    It all started with a simple frustration: <span class="text-pink-600 font-bold">Why should beautiful nails be so hard to get as a student?</span>
+                </p>
+                
+                <p class="text-gray-700">
+                    With <span class="font-bold">20,000 students</span> sharing the same campus and the nearest salon a forty-minute trip away,
+                    my booking calendar filled up—not just with appointments, but with a realization that I had uncovered an unseen market.
+                </p>
+                
+                <p class="text-gray-700">
+                    As students at <span class="font-semibold text-pink-600">Guangdong University of Finance and Economics</span>, we knew the struggle all too well. 
+                    You want to look good for that important presentation, that date, or just to feel confident in your daily life. 
+                    But salons are expensive, time-consuming, and often far from campus. Between classes, assignments, and part-time jobs, 
+                    who has time to wait hours in a salon?
+                </p>
+                
+                <p class="text-gray-700">
+                    That's when we decided: <span class="font-bold text-pink-600">enough is enough.</span> 
+                    We created GFU Nail to bring salon-quality press-on nails directly to your dorm room. 
+                    No appointments. No waiting. No breaking the bank.
+                </p>
+                
+                <p class="text-gray-700">
+                    What started as a small campus project has grown into something amazing. With <span class="font-bold">2,900+ followers</span> on Xiaohongshu, 
+                    <span class="font-bold">64,000+ likes</span>, and an <span class="font-bold">88% retention rate</span>, 
+                    we've become the trusted nail service for students who refuse to compromise on quality or convenience.
+                </p>
+                
+                <p class="text-gray-800 font-semibold text-xl mt-8">
+                    We're not just selling nails. We're empowering students to feel beautiful, confident, and ready to take on the world - 
+                    one perfect manicure at a time.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Campus Pain Points -->
+        <div class="bg-white rounded-2xl shadow-lg p-10 mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">We Understand Your Struggles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="pain-point p-6 rounded-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-2">Salons Are Too Expensive</h3>
+                            <p class="text-gray-600">A simple manicure costs a week's worth of meals. As students, every dollar counts.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pain-point p-6 rounded-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-2">No Time Between Classes</h3>
+                            <p class="text-gray-600">You're juggling lectures, assignments, and exams. Who has 2 hours for a salon visit?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pain-point p-6 rounded-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-2">Salons Are Far From Campus</h3>
+                            <p class="text-gray-600">The nearest good salon is a 30-minute bus ride away. That's time you don't have.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pain-point p-6 rounded-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-2">Long Waiting Times</h3>
+                            <p class="text-gray-600">Even with an appointment, you wait. Your time is valuable - especially during exam season.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center bg-pink-50 rounded-xl p-8 border-2 border-pink-200">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">That's Why We Created GFU Nail</h3>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    We solve all these problems. <span class="font-bold text-pink-600">Affordable prices</span> that fit your student budget. 
+                    <span class="font-bold text-pink-600">Campus delivery</span> so you never leave your dorm. 
+                    <span class="font-bold text-pink-600">Quick application</span> that takes minutes, not hours. 
+                    And <span class="font-bold text-pink-600">salon-quality results</span> that last for weeks.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Location Information -->
+        <div class="bg-white rounded-2xl shadow-lg p-10 mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Campus Location</h2>
+            <div class="text-center mb-8">
+                <div class="inline-block bg-gradient-to-r from-pink-600 to-rose-600 text-white px-8 py-4 rounded-xl">
+                    <p class="text-2xl font-bold">Guangdong University of Finance and Economics</p>
+                </div>
+                <p class="text-lg text-gray-700 mt-4">
+                    Serving students with on-campus pickup and dorm delivery
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="border border-pink-100 rounded-xl p-6 text-left">
+                    <p class="text-sm uppercase text-pink-500 font-semibold mb-2">Main Campus Studio</p>
+                    <p class="text-gray-900 font-bold mb-1">GDUFE Campus Incubator</p>
+                    <p class="text-gray-700">Building A · Room 218</p>
+                </div>
+                <div class="border border-pink-100 rounded-xl p-6 text-left">
+                    <p class="text-sm uppercase text-pink-500 font-semibold mb-2">Sanshui Studio</p>
+                    <p class="text-gray-900 font-bold mb-1">GDUFE Campus Incubator</p>
+                    <p class="text-gray-700">Qin Lake · Room 203</p>
+                </div>
+            </div>
+            <p class="text-center text-gray-600 mt-6">
+                <span class="font-semibold">Slogan:</span> "Campus Beauty, Delivered to Your Door"
+            </p>
+        </div>
+        
+        <!-- Social Media Links -->
+        <div class="bg-white rounded-lg shadow-sm p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Connect With Us</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <a href="{{ url_for('trust.redirect_xiaohongshu') }}" target="_blank" class="flex items-center space-x-4 p-6 border-2 border-gray-200 rounded-lg hover:border-pink-600 hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-pink-100 rounded-xl flex items-center justify-center">
+                        <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-lg">Follow us on Xiaohongshu</h3>
+                        <p class="text-sm text-gray-600">Join 2,900+ followers and see real student reviews</p>
+                    </div>
+                </a>
+                
+                <a href="{{ url_for('trust.redirect_wechat_article', article_id='1') }}" target="_blank" class="flex items-center space-x-4 p-6 border-2 border-gray-200 rounded-lg hover:border-green-600 hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-lg">Read our service updates</h3>
+                        <p class="text-sm text-gray-600">Latest news from Guangcai Nail Help</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Studio Gallery - Fixed with no duplicates -->
+        <div class="bg-white rounded-lg shadow-sm p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Our Studio - Real Photos</h2>
+            <p class="text-gray-600 mb-6 text-center">These are actual photos from our campus operations - proof of our quality and authenticity</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {% set studio_images = [
+                    'studio-collab-1.png',
+                    'studio-collab-2.png',
+                    'studio-collab-3.png',
+                    'studio-collab-4.png',
+                    'studio-collab-5.png',
+                    'studio-collab-6.png',
+                    'studio-collab-7.png',
+                    'studio-collab-8.png',
+                    '微信图片_20251118120405.jpg',
+                    '微信图片_20251118120406.jpg',
+                    '微信图片_20251118120407.png',
+                    '微信图片_20251118120409.png'
+                ] %}
+                {% for img in studio_images %}
+                <div class="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+                    <img src="{{ url_for('static', filename='images/studio/' ~ img) }}" 
+                         alt="GFU Nail Studio - Real Campus Operations Photo" 
+                         class="w-full h-56 object-cover hover:scale-110 transition-transform duration-300"
+                         loading="lazy">
+                </div>
+                {% endfor %}
+            </div>
+            <p class="text-center text-gray-500 text-sm mt-6 italic">
+                All photos are from our actual campus operations at Guangdong University of Finance and Economics
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

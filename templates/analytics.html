@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics Dashboard - GFU Nail{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="pt-24 pb-16 min-h-screen bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Analytics Dashboard</h1>
+            <p class="text-gray-600">Operational metrics and performance data</p>
+        </div>
+        
+        <!-- Key Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Xiaohongshu Followers</p>
+                        <p id="metric-followers" class="text-3xl font-bold text-gray-900">-</p>
+                    </div>
+                    <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Total Likes</p>
+                        <p id="metric-likes" class="text-3xl font-bold text-gray-900">-</p>
+                    </div>
+                    <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Retention Rate</p>
+                        <p id="metric-retention" class="text-3xl font-bold text-gray-900">-</p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Total Customers</p>
+                        <p id="metric-customers" class="text-3xl font-bold text-gray-900">-</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Advanced KPIs -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-gradient-to-br from-pink-600 to-rose-600 rounded-lg p-6 text-white shadow-lg">
+                <p class="text-sm uppercase tracking-wide opacity-80">Monthly Revenue</p>
+                <p id="metric-revenue" class="text-3xl font-bold mt-2">-</p>
+                <p class="text-xs opacity-80 mt-2">Live data from campus studios</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <p class="text-sm text-gray-600">Avg. Order Value</p>
+                <p id="metric-aov" class="text-3xl font-bold text-gray-900">-</p>
+                <p class="text-xs text-gray-500 mt-2">Includes sizing & adhesive kits</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <p class="text-sm text-gray-600">Conversion Rate</p>
+                <p id="metric-conversion" class="text-3xl font-bold text-gray-900">-</p>
+                <p class="text-xs text-gray-500 mt-2">Shop visits to checkouts</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <p class="text-sm text-gray-600">Monthly Bookings</p>
+                <p id="metric-bookings" class="text-3xl font-bold text-gray-900">-</p>
+                <p class="text-xs text-gray-500 mt-2">Across both incubator studios</p>
+            </div>
+        </div>
+
+        <!-- Campus Performance -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8">
+                <div>
+                    <p class="text-sm uppercase text-pink-500 font-semibold">Campus Operations</p>
+                    <h3 class="text-2xl font-bold text-gray-900 mt-2">Live studio output</h3>
+                    <p class="text-gray-600 mt-2">Side-by-side comparison of our two incubator labs.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="border border-pink-100 rounded-2xl p-6 bg-gradient-to-br from-pink-50 to-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-sm uppercase text-pink-500 font-semibold">Main Campus</p>
+                            <p class="text-xl font-bold text-gray-900">Building A · Room 218</p>
+                        </div>
+                        <span class="text-sm bg-pink-100 text-pink-700 px-3 py-1 rounded-full">Guangzhou</span>
+                    </div>
+                    <div class="space-y-2 text-gray-700">
+                        <p><span class="font-semibold" id="campus-main-bookings">-</span> monthly bookings</p>
+                        <p><span class="font-semibold" id="campus-main-revenue">-</span> in revenue</p>
+                        <p><span class="font-semibold" id="campus-main-repeat">-</span> repeat rate</p>
+                    </div>
+                </div>
+                <div class="border border-purple-100 rounded-2xl p-6 bg-gradient-to-br from-purple-50 to-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-sm uppercase text-purple-500 font-semibold">Sanshui Campus</p>
+                            <p class="text-xl font-bold text-gray-900">Qin Lake · Room 203</p>
+                        </div>
+                        <span class="text-sm bg-purple-100 text-purple-700 px-3 py-1 rounded-full">Sanshui</span>
+                    </div>
+                    <div class="space-y-2 text-gray-700">
+                        <p><span class="font-semibold" id="campus-sanshui-bookings">-</span> monthly bookings</p>
+                        <p><span class="font-semibold" id="campus-sanshui-revenue">-</span> in revenue</p>
+                        <p><span class="font-semibold" id="campus-sanshui-repeat">-</span> repeat rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Followers Growth</h3>
+                <canvas id="followers-chart"></canvas>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Retention Trend</h3>
+                <canvas id="retention-chart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Campus Booking Velocity</h3>
+                <canvas id="campus-bookings-chart"></canvas>
+            </div>
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Collection Mix</h3>
+                <canvas id="collection-chart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+    // Load metrics
+    fetch('/analytics/api/metrics')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('metric-followers').textContent = data.xiaohongshu_followers.toLocaleString() + '+';
+            document.getElementById('metric-likes').textContent = data.xiaohongshu_likes.toLocaleString() + '+';
+            document.getElementById('metric-retention').textContent = data.retention_rate + '%';
+            document.getElementById('metric-customers').textContent = data.total_customers.toLocaleString();
+            document.getElementById('metric-revenue').textContent = currencyFormatter.format(data.monthly_revenue);
+            document.getElementById('metric-aov').textContent = currencyFormatter.format(data.avg_order_value);
+            document.getElementById('metric-conversion').textContent = data.conversion_rate + '%';
+            document.getElementById('metric-bookings').textContent = data.monthly_bookings;
+            renderCampusPerformance(data.campus_performance, currencyFormatter);
+        })
+        .catch(error => console.error('Error loading metrics:', error));
+    
+    // Load chart data
+    fetch('/analytics/api/chart-data')
+        .then(response => response.json())
+        .then(data => {
+            // Followers chart
+            new Chart(document.getElementById('followers-chart'), {
+                type: 'line',
+                data: {
+                    labels: data.followers_growth.labels,
+                    datasets: [{
+                        label: 'Followers',
+                        data: data.followers_growth.data,
+                        borderColor: '#EC4899',
+                        backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            
+            // Retention chart
+            new Chart(document.getElementById('retention-chart'), {
+                type: 'bar',
+                data: {
+                    labels: data.retention_trend.labels,
+                    datasets: [{
+                        label: 'Retention Rate (%)',
+                        data: data.retention_trend.data,
+                        backgroundColor: '#10B981',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Campus bookings chart
+            new Chart(document.getElementById('campus-bookings-chart'), {
+                type: 'line',
+                data: {
+                    labels: data.campus_bookings.labels,
+                    datasets: [
+                        {
+                            label: 'Main Campus',
+                            data: data.campus_bookings.main,
+                            borderColor: '#ec4899',
+                            backgroundColor: 'rgba(236,72,153,0.1)',
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: 'Sanshui Campus',
+                            data: data.campus_bookings.sanshui,
+                            borderColor: '#8b5cf6',
+                            backgroundColor: 'rgba(139,92,246,0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Collection mix chart
+            new Chart(document.getElementById('collection-chart'), {
+                type: 'doughnut',
+                data: {
+                    labels: data.collection_mix.labels,
+                    datasets: [{
+                        data: data.collection_mix.data,
+                        backgroundColor: ['#f472b6', '#ec4899', '#c084fc', '#60a5fa'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error loading chart data:', error));
+
+    function renderCampusPerformance(perf, currencyFormatter) {
+        const main = perf.main;
+        const sanshui = perf.sanshui;
+        document.getElementById('campus-main-bookings').textContent = `${main.bookings}`;
+        document.getElementById('campus-main-revenue').textContent = currencyFormatter.format(main.revenue);
+        document.getElementById('campus-main-repeat').textContent = `${main.repeat_rate}% repeat`;
+
+        document.getElementById('campus-sanshui-bookings').textContent = `${sanshui.bookings}`;
+        document.getElementById('campus-sanshui-revenue').textContent = currencyFormatter.format(sanshui.revenue);
+        document.getElementById('campus-sanshui-repeat').textContent = `${sanshui.repeat_rate}% repeat`;
+    }
+});
+</script>
+{% endblock %}
+

@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Products - GFU Nail{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="pt-24 pb-16 min-h-screen bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Our Products</h1>
+            <p class="text-gray-600 text-lg">Premium press-on nails in various styles and sizes</p>
+        </div>
+
+        <!-- Product Hero -->
+        <div class="bg-white rounded-3xl shadow-lg p-8 mb-10 border border-pink-100">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-sm uppercase font-semibold text-pink-500 mb-3">Real Studio Photos</p>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Every set you see exists in our campus studio</h2>
+                    <p class="text-gray-600 mb-4">We photograph each collection in our GDUFE incubator rooms. What you see online is what arrives at your dorm—no stock photos, no AI renders.</p>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li>• Main Campus: Building A · Room 218</li>
+                        <li>• Sanshui Campus: Qin Lake · Room 203</li>
+                        <li>• Personalized sizing & adhesive guides included</li>
+                    </ul>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="{{ url_for('static', filename='images/products/product-rose-bow.jpg') }}" alt="Rose Bow Set" class="rounded-2xl object-cover h-48 w-full shadow-md">
+                    <img src="{{ url_for('static', filename='images/products/product-chocolate-bow.png') }}" alt="Chocolate Bow Set" class="rounded-2xl object-cover h-48 w-full shadow-md">
+                    <img src="{{ url_for('static', filename='images/products/product-mocha-swirl.png') }}" alt="Mocha Swirl" class="rounded-2xl object-cover h-48 w-full shadow-md">
+                    <img src="{{ url_for('static', filename='images/products/product-pearl-glaze.jpg') }}" alt="Pearl Glaze" class="rounded-2xl object-cover h-48 w-full shadow-md">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Filters -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Style</label>
+                    <select id="filter-style" class="w-full">
+                        <option value="all">All Styles</option>
+                        <option value="classic">Classic</option>
+                        <option value="trendy">Trendy</option>
+                        <option value="minimalist">Minimalist</option>
+                        <option value="glamour">Glamour</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Shape</label>
+                    <select id="filter-shape" class="w-full">
+                        <option value="all">All Shapes</option>
+                        <option value="square">Square</option>
+                        <option value="almond">Almond</option>
+                        <option value="coffin">Coffin</option>
+                        <option value="round">Round</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                    <select id="filter-color" class="w-full">
+                        <option value="all">All Colors</option>
+                        <option value="nude">Nude</option>
+                        <option value="pink">Pink</option>
+                        <option value="red">Red</option>
+                        <option value="black">Black</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Occasion</label>
+                    <select id="filter-occasion" class="w-full">
+                        <option value="all">All Occasions</option>
+                        <option value="everyday">Everyday</option>
+                        <option value="party">Party</option>
+                        <option value="wedding">Wedding</option>
+                        <option value="office">Office</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Products Grid -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Products will be loaded here -->
+        </div>
+        
+        <!-- Loading State -->
+        <div id="loading" class="text-center py-12 hidden">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-pink-600"></div>
+            <p class="mt-4 text-gray-600">Loading products...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    loadProducts();
+    
+    // Filter event listeners
+    ['style', 'shape', 'color', 'occasion'].forEach(filter => {
+        document.getElementById(`filter-${filter}`).addEventListener('change', loadProducts);
+    });
+    
+    function loadProducts() {
+        const style = document.getElementById('filter-style').value;
+        const shape = document.getElementById('filter-shape').value;
+        const color = document.getElementById('filter-color').value;
+        const occasion = document.getElementById('filter-occasion').value;
+        
+        document.getElementById('loading').classList.remove('hidden');
+        document.getElementById('products-grid').innerHTML = '';
+        
+        fetch(`/products/api/list?style=${style}&shape=${shape}&color=${color}&occasion=${occasion}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading').classList.add('hidden');
+                renderProducts(data.products);
+            })
+            .catch(error => {
+                console.error('Error loading products:', error);
+                document.getElementById('loading').classList.add('hidden');
+            });
+    }
+    
+    function renderProducts(products) {
+        const grid = document.getElementById('products-grid');
+        grid.innerHTML = products.map(product => `
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-lg transition-shadow">
+                <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover" onerror="this.src='/static/images/placeholder.jpg'">
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-900 mb-2">${product.name}</h3>
+                    <p class="text-sm text-gray-600 mb-3">${product.description}</p>
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <span class="text-lg font-bold text-pink-600">$${product.price.toFixed(2)}</span>
+                            ${product.original_price ? `<span class="text-sm text-gray-400 line-through ml-2">$${product.original_price.toFixed(2)}</span>` : ''}
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-sm text-gray-600 ml-1">${product.rating}</span>
+                        </div>
+                    </div>
+                    <button onclick="GFUNail.addToCart(${product.id})" class="w-full bg-pink-600 text-white py-2 rounded-lg hover:bg-pink-700 transition-colors">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+});
+</script>
+{% endblock %}
+
